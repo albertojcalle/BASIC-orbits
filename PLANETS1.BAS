@@ -4,8 +4,9 @@ SCREEN 9
 
 'Scale duration and zoom
 
-zoom = 30
-duration = 1
+zoom = 33
+years = 1
+
 
 massE = 1!
 massM = .107
@@ -47,12 +48,37 @@ vyS0 = -.324
 
 'Initial time
 t = 0!
+duration = years * 6.304
+
+'loop times
+k = 1
 
 CIRCLE (320, 175), 5, 14
 PAINT (320, 175), 14, 14
 
 
-'Bucle principal
+rT = SQR(xT0 * xT0 + yT0 * yT0)
+rM = SQR(xM0 * xM0 + yM0 * yM0)
+rJ = SQR(xJ0 * xJ0 + yJ0 * yJ0)
+rS = SQR(xS0 * xS0 + yS0 * yS0)
+
+elapsed = t / 6.304
+
+LOCATE 1, 1
+
+PRINT "Planet Distance to the sun in UA  ";
+
+LOCATE 3, 1
+
+PRINT USING "Earth       ###.#####     "; rT
+PRINT USING "Mars        ###.#####     "; rM
+PRINT USING "Jupiter     ###.####     "; rJ
+PRINT USING "Saturn      ###.#####     "; rS
+PRINT ""
+PRINT USING "Elapsed time ##.##### years"; elapsed
+
+
+'Principal loop
 WHILE t < duration
 
 'Distance to the sun
@@ -141,34 +167,42 @@ CIRCLE (ixM, iyM), 1, 12
 CIRCLE (ixJ, iyJ), 1, 6
 CIRCLE (ixS, iyS), 1
 
-
-t = t + deltat
-WEND
-
-'Energy computation
-
-ekinT = .5 * massE * (vxT * vxT + vyT * vyT)
-ekinM = .5 * massM * (vxM * vxM + vyM * vyM)
-ekinJ = .5 * massJ * (vxJ * vxJ + vyJ * vyJ)
-ekinS = .5 * massS * (vxS * vxS + vyS * vyS)
-
-epotT = -dk * massE / rT
-epotM = -dk * massM / rM
-epotJ = -dk * massJ / rJ
-epotS = -dk * massS / rS
-
-etotT = ekinT + epotT
-etotM = ekinM + epotM
-etotJ = ekinJ + epotJ
-etotS = ekinS + epotS
+m = k MOD 100
+IF m = 0 THEN
+elapsed = t / 6.304
 
 LOCATE 1, 1
 
-PRINT "Planet Distance    Energy";
+PRINT "Planet Distance to the sun in UA  ";
 
 LOCATE 3, 1
 
-PRINT USING "Earth     ###.##     ###.##"; rT; etotT
-PRINT USING "Marss      ###.##     ###.##"; rM; etotM
-PRINT USING "Jupiter    ###.##     ###.##"; rJ; etotJ
-PRINT USING "Saturn    ###.##     ###.##"; rS; etotS
+PRINT USING "Earth       ###.#####   "; rT
+PRINT USING "Mars        ###.#####     "; rM
+PRINT USING "Jupiter     ###.#####     "; rJ
+PRINT USING "Saturn      ###.#####     "; rS
+PRINT ""
+PRINT USING "Elapsed time ##.##### years"; elapsed
+
+END IF
+
+k = k + 1
+t = t + deltat
+WEND
+
+elapsed = years
+
+LOCATE 1, 1
+
+PRINT "Planet Distance to the sun in UA  ";
+
+LOCATE 3, 1
+
+PRINT USING "Earth       ###.#####   "; rT
+PRINT USING "Mars        ###.#####     "; rM
+PRINT USING "Jupiter     ###.#####     "; rJ
+PRINT USING "Saturn      ###.#####     "; rS
+PRINT ""
+PRINT USING "Elapsed time ##.##### years"; elapsed
+
+
