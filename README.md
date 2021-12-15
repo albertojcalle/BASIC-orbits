@@ -6,4 +6,4 @@ The program is written in QuickBasic. It can be executed inside a MS-DOS emulato
 
 ![orbits.gif](orbits.gif)
 
-In this example we sart in a 4 planet conjunction, and we observe the results after one year. We observe that the end position for Earth is precise up to 2 decimals. This can be improved making the step of the numerical method (deltat) smaller, at the cost of more computation time.
+In this example we start in a 4 planet conjunction, and we observe the results after one year. We observe that the end position for Earth is precise up to 2 decimals. This can be improved making the step of the numerical method (deltat) smaller, at the cost of more computation time.
